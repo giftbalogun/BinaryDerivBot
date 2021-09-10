@@ -1,0 +1,13 @@
+{
+    "name": "RBV Bot",
+    "short_name": "RBV Bot",
+    "start_url": "/python/trading.html",
+    "display": "standalone",
+    "theme_color": "#F07440",
+    "background_color": "#F07440",
+    "icons": [{
+        "src": "https://royalbcodeventures.com.ng/assets/images/favicon.jpg",
+        "sizes": "128x128",
+        "type": "image/jpg"
+    }]
+}
