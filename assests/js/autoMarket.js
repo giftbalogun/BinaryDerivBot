@@ -70,7 +70,6 @@ function autoMarket() {
 			for (var i = 0; i < autoData.R_25.midOC.length - 1; i++) {
 				if (autoData.R_25.midOC[i] > autoData.R_25.midOC[i + 1]) {
 					autoData.R_25.vector = autoData.R_25.vector - 0.3;
-
 				} else {
 					autoData.R_25.vector = autoData.R_25.vector + 0.3;
 				}
@@ -97,7 +96,6 @@ function autoMarket() {
 			for (var i = 0; i < autoData.R_50.midOC.length - 1; i++) {
 				if (autoData.R_50.midOC[i] > autoData.R_50.midOC[i + 1]) {
 					autoData.R_50.vector = autoData.R_50.vector - 0.3;
-
 				} else {
 					autoData.R_50.vector = autoData.R_50.vector + 0.3;
 				}
@@ -124,7 +122,6 @@ function autoMarket() {
 			for (var i = 0; i < autoData.R_75.midOC.length - 1; i++) {
 				if (autoData.R_75.midOC[i] > autoData.R_75.midOC[i + 1]) {
 					autoData.R_75.vector = autoData.R_75.vector - 0.3;
-
 				} else {
 					autoData.R_75.vector = autoData.R_75.vector + 0.3;
 				}
@@ -157,7 +154,6 @@ function autoMarket() {
 					autoData.R_100.vector = autoData.R_100.vector + 0.3;
 				}
 			}
-
 		});
 		// console.log('normalisedR100 Close = ', autoData.R_100.norm);
 		api.getTickHistory('RDBEAR', {
@@ -221,7 +217,6 @@ function autoMarket() {
 }
 
 function sdevCalc() {
-
 	// Corr of high and lows
 	var CorrRDBULL = -Math.abs(ss.sampleCorrelation(autoData.RDBULL.high, autoData.RDBULL.low));
 	var CorrRDBEAR = -Math.abs(ss.sampleCorrelation(autoData.RDBEAR.high, autoData.RDBEAR.low));
@@ -257,7 +252,6 @@ function sdevCalc() {
 		});
 	} else {
 		marketGood = true;
-
 	}
 
 	let obj = {
