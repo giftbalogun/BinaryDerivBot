@@ -1,7 +1,7 @@
 {
     "name": "RBV Bot",
     "short_name": "RBV Bot",
-    "start_url": "/python/rbvbot/index.html",
+    "start_url": "/rbvbot/",
     "display": "standalone",
     "theme_color": "#F07440",
     "background_color": "#F07440",

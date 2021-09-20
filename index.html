@@ -15,7 +15,7 @@
 	<meta name="robots" content="index, follow">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="language" content="English">
-	
+
 	<link rel="stylesheet" href="assests/css/semantic.min.css" />
 	<script src="assests/js/jquery.min.js"></script>
 	<script src="assests/js/notifications.js"></script>
@@ -125,7 +125,8 @@
 								</select>
 							</div>
 							<div class="vertically fitted  aligned item">
-								&nbsp;<span id="currency oauthaccount"></span>&nbsp;|&nbsp;<span id="balance">Please Log In</span>
+								&nbsp;<span id="currency oauthaccount"></span>&nbsp;|&nbsp;<span id="balance">Please Log
+									In</span>
 							</div>
 						</div>
 						<div id="tickChart" class="ui centered container">
@@ -776,32 +777,31 @@
 <script src="https://binarybot.live/mbot/lib/jquery.sparkline.js"></script>
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 <script src="assests/js/semantic.min.js"></script>
-<script src="https://binarybot.live/mbot/src/home/common.js"></script>
+<script src="assests/js/common.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://binarybot.live/mbot/lib/moment.min.js"></script>
 <script src="https://binarybot.live/mbot/lib/trendyways.min.js"></script>
 <script src="https://binarybot.live/mbot/lib/simple-statistics.min.js"></script>
 <script src="https://binarybot.live/mbot/src/home/variables.js"></script>
-<script src="https://binarybot.live/mbot/src/strategies/data.js"></script>
+<script src="assests/js/strategies/data.js"></script>
 <script src="assests/js/saveParameters.js"></script>
 <script src="assests/js/manualTrading.js"></script>
 <script src="assests/js/placeTrade.js"></script>
-<script src="https://binarybot.live/mbot/src/strategies/priceAction.js"></script>
+<script src="assests/js/strategies/priceAction.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/HeikenAshi.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/movingAverage.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/adaptiveML.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/HeikenMA.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/SMAtrend.js"></script>
 <script src="https://binarybot.live/mbot/src/strategies/PivotPoint.js"></script>
-<script src="https://binarybot.live/mbot/src/home/botControls.js"></script>
+<script src="assests/js/botControls.js"></script>
 <script src="assests/js/updateDash.js"></script>
-<script src="https://binarybot.live/mbot/src/home/resetTrading.js"></script>
+<script src="assests/js/resetTrading.js"></script>
 <script src="assests/js/login.js"></script>
 <script src="assests/js/autoMarket.js"></script>
 <script src="assests/js/subscriptions.js"></script>
 <script src="assests/js/startup.js"></script>
-
-<!-- Insert this line after script imports <script src="https://binarybot.live/mbot/lib/onsen/js/onsenui.min.js"></script> -->
+<!-- Insert this line after script imports -->
 <script>
 	if (window.module) module = window.module;
 </script>
@@ -810,8 +810,10 @@
 	const errorNotify = window.createNotification({
 		// close on click
 		closeOnClick: true,
+
 		showDuration: 7500,
 		positionClass: "nfc-bottom-right",
+
 		theme: "warning",
 	});
 
@@ -821,7 +823,6 @@
 			"_blank"
 		);
 	});
-
 	// Load tradingview based on symbol
 	var chartSymbol = "";
 
@@ -830,6 +831,15 @@
 		if (symbolsymbol != chartSymbol) {
 			console.log("should be reloading");
 			chartSymbol = symbolsymbol;
+			// document.getElementById("tradingviewWindow").src =
+			//   symbolsymbol + ".html";
+
+			// document.getElementById('tradingviewWindow').contentWindow.location.reload(true)
+
+			// document.getElementById("tradingviewWindow").innerHTML =
+			//   '<object type="text/html" data="' +
+			//   symbolsymbol +
+			//   '.html" ></object>';
 		}
 	}
 	changeChart();
@@ -837,6 +847,7 @@
 </script>
 <script>
 	// Menu functions for onsen.io
+
 	window.fn = {};
 
 	window.fn.open = function () {
@@ -883,6 +894,7 @@
 	api.events.on("tick", function (response) {
 		//console.log('subscription =', response);
 		// console.log(response.tick.symbol, response.tick.quote)
+
 		ticks.push(response.tick.quote);
 		lastTick = response.tick.quote * 1;
 		lastEpoch = response.tick.epoch * 1;
@@ -891,6 +903,7 @@
 		// Sparkline rendering
 
 		var normalRange = null;
+
 		var color;
 		var barrierColour;
 		var drawontop;
@@ -929,11 +942,13 @@
 				color = "green";
 				normalRange2 = winLossBarrier;
 				normalRange = Math.max(...ticks.slice(-150));
+
 				barrierColour = "#C6ECC940";
 			} else if (lastTick < winLossBarrier) {
 				color = "red";
 				normalRange = winLossBarrier;
 				normalRange2 = Math.min(...ticks.slice(-150));
+
 				barrierColour = "#EEB5B540";
 			}
 		}
