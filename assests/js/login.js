@@ -1,5 +1,12 @@
 // OAuth log in functions for binary.com and deriv
 
+$("#oauthaccountsign").click(function () {
+  window.open(
+    `https://track.deriv.com/_J7M51m8rKaiws6I0Pc5-VWNd7ZgqdRLk/1/`,
+    "_self"
+  );
+});
+
 // OAuth link
 app_id_ = 29921;
 $("#oauthaccount").click(function () {

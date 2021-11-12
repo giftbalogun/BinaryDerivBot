@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="spinner7.gif" alt="BinaryDerivBot" />
+  <img src="img/loading.gif" alt="BinaryDerivBot" />
 
 &#xa0;
 

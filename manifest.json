@@ -1,13 +1,15 @@
 {
     "name": "RBV Bot",
     "short_name": "RBV Bot",
-    "start_url": "/rbvbot/",
+    "start_url": "/",
     "display": "standalone",
     "theme_color": "#F07440",
     "background_color": "#F07440",
-    "icons": [{
-        "src": "https://royalbcodeventures.com.ng/assets/images/favicon.jpg",
-        "sizes": "128x128",
-        "type": "image/jpg"
-    }]
+    "icons": [
+        {
+            "src": "img/logo.png",
+            "sizes": "128x128",
+            "type": "image/jpg"
+        }
+    ]
 }

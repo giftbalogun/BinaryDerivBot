@@ -2,774 +2,789 @@
 <html lang="en">
 
 <head>
-	<link rel="shortcut icon" type="image/jpg" href="https://royalbcodeventures.com.ng/assets/images/favicon.jpg" />
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>RBV Trading Bot</title>
-	<meta name="title" content="Binary.com - Deriv.com Bots">
-	<meta name="description"
-		content="BinaryBot is a free-trading app that provides features . for Binary.com - Deriv.com ">
-	<meta name="keywords"
-		content="digital options, forex, forex trading, online trading, financial trading, digitals trading, index trading, trading indices, forex trades, trading commodities, digital options strategy, binary broker, binary bet, digital options trading platform, binary strategy, finance, investment, trading">
-	<meta name="robots" content="index, follow">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="language" content="English">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>RBV Trading Bot</title>
+    <meta name="title" content="Binary.com - Deriv.com Bots">
+    <meta name="description"
+        content="BinaryBot is a free-trading app that provides features . for Binary.com - Deriv.com ">
+    <meta name="keywords"
+        content="digital options, forex, forex trading, online trading, financial trading, digitals trading, index trading, trading indices, forex trades, trading commodities, digital options strategy, binary broker, binary bet, digital options trading platform, binary strategy, finance, investment, trading">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
 
-	<link rel="stylesheet" href="assests/css/semantic.min.css" />
-	<script src="assests/js/jquery.min.js"></script>
-	<script src="assests/js/notifications.js"></script>
-	<script src="assests/js/semantic.min.js"></script>
-	<link rel="stylesheet" href="assests/onsen/css/onsenui.css">
-	<link rel="stylesheet" href="assests/onsen/css/onsen-css-components.min.css">
-	<link rel="stylesheet" href="assests/css/semantic.min.css" />
-	<link rel="stylesheet" href="assests/css/notifications.css" />
-	<link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="assests/css/semantic.min.css" />
+    <script src="assests/js/jquery.min.js"></script>
+    <script src="assests/js/notifications.js"></script>
+    <script src="assests/js/semantic.min.js"></script>
+    <link rel="stylesheet" href="assests/onsen/css/onsenui.css">
+    <link rel="stylesheet" href="assests/onsen/css/onsen-css-components.min.css">
+    <link rel="stylesheet" href="assests/css/semantic.min.css" />
+    <link rel="stylesheet" href="assests/css/notifications.css" />
+    <link rel="manifest" href="manifest.json" />
 
-	<style>
-		.overlay {
-			position: absolute;
-			top: 13%;
-			/* position the top  edge of the element at the middle of the parent 	<link rel="stylesheet" href="onsenui.css" /> */
-			left: 40%;
-			/* position the left edge of the element at the middle of the parent */
-			z-index: 1000;
-			/*dim the background*/
-		}
+    <style>
+        .overlay {
+            opacity: 0.8;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 13%;
+            left: 40%;
+            z-index: 1000;
+        }
 
-		h5 {
-			color: rgb(32, 32, 32);
-		}
+        h1 {
+            color: rgb(32, 32, 32);
+        }
 
-		#loading {
-			margin: 0;
-			position: fixed;
-			width: 100%;
-			height: 100vh;
-			background: rgb(255, 255, 255) url("spinner7.gif") no-repeat center center;
-			z-index: 150000;
-		}
+        h5 {
+            color: rgb(32, 32, 32);
+        }
 
-		#loadingfooter {
-			position: absolute;
-			bottom: 0%;
-			width: 100%;
-			z-index: 160000;
-		}
-	</style>
+        #loading {
+            margin: 0;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: rgb(255, 255, 255) url("img/loading.gif") no-repeat center center;
+            z-index: 150000;
+        }
 
-	<style>
-		html,
-		iframe {
-			width: 100%;
-			height: 97vh;
-		}
+        #loadingfooter {
+            position: absolute;
+            bottom: 0%;
+            width: 100%;
+            z-index: 160000;
+        }
+    </style>
 
-		ons-page {
-			width: 100%;
-			height: 97vh;
-		}
-	</style>
+    <style>
+        html,
+        iframe {
+            width: 100%;
+            height: 97vh;
+        }
+
+        ons-page {
+            width: 100%;
+            height: 97vh;
+        }
+    </style>
 </head>
 
 <body onload="startup()">
-	<div class="ui basic modal">
-		<div class="ui hidden divider"></div>
-		<div class="ui hidden divider"></div>
-		<div class="ui icon header" id="oauthaccount">
-			Click Here to Login with Deriv or Binary.com Account
-		</div>
-		<div class="content">
-			<img style="cursor: pointer; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      border-radius: 1em;" class="ui centered image" src="https://binarybot.live/mbot/src/images/login.png"
-				id="oauthaccount" />
-		</div>
-	</div>
+    <div class="ui basic modal">
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
 
-	<div id="loading">
-		<div id="loadingfooter">
-			<img class="ui centered small image" src="https://royalbcodeventures.com.ng/assets/images/favicon.jpg" />
-			<h5 class="ui center aligned black header">
-				<div style="font-family: 'Comfortaa', cursive; font-size: 0.7em" class="content">
-					Sit Back And Let The Bot Make The Profit
-					<div class="black sub header"></div>
-				</div>
-			</h5>
-			<div class="ui hidden divider"></div>
-		</div>
-	</div>
-	<div style="margin: 3px" class="ui grid">
-		<div class="four wide column">
-			<ons-navigator swipeable id="myNavigator" page="bot.html"></ons-navigator>
+        <div class="ui icon header" id="oauthaccountsign">
+            <h1>No Account? Create Now</h1>
+        </div>
+        <div class="content">
+            <img style="cursor: pointer; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            border-radius: 0.5em;" class="ui centered image" src="img/signup.png" />
+        </div>
 
-			<template id="bot.html">
-				<ons-page id="bot">
-					<ons-toolbar>
-						<div class="left">
-							<ons-toolbar-button id="settings" tappable style="color: black;">
-								<ons-icon style="color: rgb(7, 18, 41)" icon="md-settings"></ons-icon>
-								Settings
-							</ons-toolbar-button>
-						</div>
-						<div class="right" id="logoutbtn">
-							<ons-toolbar-button tappable style="color: black;" onclick="logout()">
-								Logout
-								<ons-icon style="color: rgb(7, 18, 41)" icon="fa-sign-out"></ons-icon>
-							</ons-toolbar-button>
-						</div>
-					</ons-toolbar>
-					<div style="margin: 7px" class="container">
-						<div class="ui vertically fitted right aligned text menu">
-							<div class="field" id="secltcontainer">
-								<select class="ui dropdown" onchange="postLogin()" id="accountSelect">
-								</select>
-							</div>
-							<div class="vertically fitted  aligned item">
-								&nbsp;<span id="currency oauthaccount"></span>&nbsp;|&nbsp;<span id="balance">Please Log
-									In</span>
-							</div>
-						</div>
-						<div id="tickChart" class="ui centered container">
-							<div class="overlay" id="symbolOverlay"></div>
-							<div id="sparkline" class="sparklines"></div>
-						</div>
-						<div style="margin: 13px" class="padded container">
-							<div class="ui fluid mini buttons">
-								<button id="startBot" class="ui icon button">
-									Play
-								</button>
-								<button id="pauseBot" class="ui icon button">
-									Pause
-								</button>
-								<button id="resetBot" class="ui orange labeled icon button">
-									Reset
-								</button>
-							</div>
-						</div>
-						<div class="ui hidden divider"></div>
-						<div class="ui hidden divider"></div>
-						<div class="ui fluid buttons">
-							<button id="callTrade" class="ui positive button">Call</button>
-							<!-- <div class="or"></div> -->
-							<button id="putTrade" class="ui negative button">Put</button>
-						</div>
-						<div class="ui hidden divider"></div>
-					</div>
-					<div style="margin: 7px" class="stretched row">
-						<h6 style="
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+
+        <div class="ui icon header" id="oauthaccount">
+            <h1>Login with Deriv/Binary.com Account</h1>
+        </div>
+        <div class="content">
+            <img style="cursor: pointer; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border-radius: 1em;" class="ui centered image" src="img/login.png" id="oauthaccount" />
+        </div>
+    </div>
+
+    <div id="loading">
+        <div id="loadingfooter">
+            <img class="ui centered small image" src="img/logo.png" />
+            <h5 class="ui center aligned black header">
+                <div style="font-family: 'Comfortaa', cursive; font-size: 0.7em" class="content">
+                    Sit Back And Let The Bot Make The Profit
+                    <div class="black sub header"></div>
+                </div>
+            </h5>
+            <div class="ui hidden divider"></div>
+        </div>
+    </div>
+    <div style="margin: 3px" class="ui grid">
+        <div class="four wide column">
+            <ons-navigator swipeable id="myNavigator" page="bot.html"></ons-navigator>
+
+            <template id="bot.html">
+                <ons-page id="bot">
+                    <ons-toolbar>
+                        <div class="left">
+                            <ons-toolbar-button id="settings" tappable style="color: black;">
+                                <ons-icon style="color: rgb(7, 18, 41)" icon="md-settings"></ons-icon>
+                                Settings
+                            </ons-toolbar-button>
+                        </div>
+                        <div class="right" id="logoutbtn">
+                            <ons-toolbar-button tappable style="color: black;" onclick="logout()">
+                                Logout
+                                <ons-icon style="color: rgb(7, 18, 41)" icon="fa-sign-out"></ons-icon>
+                            </ons-toolbar-button>
+                        </div>
+                    </ons-toolbar>
+                    <div style="margin: 7px" class="container">
+                        <div class="ui vertically fitted right aligned text menu">
+                            <div class="field" id="secltcontainer">
+                                <select class="ui dropdown" onchange="postLogin()" id="accountSelect">
+                                </select>
+                            </div>
+                            <div class="vertically fitted  aligned item">
+                                <span id="currency oauthaccount"></span>|<span id="balance">Please Log
+                                    In</span>
+                            </div>
+                        </div>
+                        <div id="tickChart" class="ui centered container">
+                            <div class="overlay" id="symbolOverlay"></div>
+                            <div id="sparkline" class="sparklines"></div>
+                        </div>
+                        <div style="margin: 13px" class="padded container">
+                            <div class="ui fluid mini buttons">
+                                <button id="startBot" class="ui icon button">
+                                    Play
+                                </button>
+                                <button id="pauseBot" class="ui icon button">
+                                    Pause
+                                </button>
+                                <button id="resetBot" class="ui orange labeled icon button">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <div class="ui fluid buttons">
+                            <button id="callTrade" class="ui positive button">Call</button>
+                            <!-- <div class="or"></div> -->
+                            <button id="putTrade" class="ui negative button">Put</button>
+                        </div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                    <div style="margin: 7px" class="stretched row">
+                        <h6 style="
 							color: black;
 							font-weight: 100;
 							font-family: 'Comfortaa', cursive;
 							" class="ui horizontal divider header">
-							Logs
-						</h6>
-						<div class="ui small fluid card">
-							<p style="color: grey; overflow-y: auto; max-height: 20vh">
-								<span id="notifyme"></span>
-							</p>
-						</div>
-					</div>
-					<ons-bottom-toolbar style="bottom: 3em;">
-						<div style="width: 100%" class="ui black center aligned sticky">
-							<div class="ui center aligned inverted grid">
-								<div class="black center inverted aligned row">
-									<div class="ui center aligned inverted segment">
-										<div class="ui mini inverted inverted statistic">
-											<div class="value">
-												<span id="stake">...</span>
-											</div>
-											<div class="label">Stake</div>
-										</div>
+                            Logs
+                        </h6>
+                        <div class="ui small fluid card">
+                            <p style="color: grey; overflow-y: auto; max-height: 20vh">
+                                <span id="notifyme"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <ons-bottom-toolbar style="bottom: 3em;">
+                        <div style="width: 100%" class="ui black center aligned sticky">
+                            <div class="ui center aligned inverted grid">
+                                <div class="black center inverted aligned row">
+                                    <div class="ui center aligned inverted segment">
+                                        <div class="ui mini inverted inverted statistic">
+                                            <div class="value">
+                                                <span id="stake">...</span>
+                                            </div>
+                                            <div class="label">Stake</div>
+                                        </div>
 
-										<div id="hidemgstep" class="ui red mini compact inverted statistic">
-											<div class="value">
-												<span id="mgStep">...</span>
-											</div>
-											<div class="label">MG Step</div>
-										</div>
+                                        <div id="hidemgstep" class="ui red mini compact inverted statistic">
+                                            <div class="value">
+                                                <span id="mgStep">...</span>
+                                            </div>
+                                            <div class="label">MG Step</div>
+                                        </div>
 
-										<div class="ui mini compact inverted statistic">
-											<div class="value">
-												<span id="winRate">...</span>
-											</div>
-											<div class="label">WinRate %</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</ons-bottom-toolbar>
-					<ons-bottom-toolbar>
-						<div style="width: 100%" class="ui black center aligned sticky">
-							<div class="ui center aligned inverted grid">
-								<div class="black center inverted aligned row">
-									<div class="ui center aligned inverted segment">
-										<div class="ui mini compact inverted statistic">
-											<div class="value">
-												<span id="noTrades">...</span>
-											</div>
-											<div class="label">No. Trades</div>
-										</div>
+                                        <div class="ui mini compact inverted statistic">
+                                            <div class="value">
+                                                <span id="winRate">...</span>
+                                            </div>
+                                            <div class="label">WinRate %</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ons-bottom-toolbar>
+                    <ons-bottom-toolbar>
+                        <div style="width: 100%" class="ui black center aligned sticky">
+                            <div class="ui center aligned inverted grid">
+                                <div class="black center inverted aligned row">
+                                    <div class="ui center aligned inverted segment">
+                                        <div class="ui mini compact inverted statistic">
+                                            <div class="value">
+                                                <span id="noTrades">...</span>
+                                            </div>
+                                            <div class="label">No. Trades</div>
+                                        </div>
 
-										<div id="hidecumloss" class="ui yellow mini compact inverted statistic">
-											<div class="value">
-												<span id="cumlosses">...</span>
-											</div>
-											<div class="label">cum. losses</div>
-										</div>
-										<div class="ui right mini compact inverted statistic">
-											<div class="value">
-												<span id="profit">...</span>
-											</div>
-											<div class="label">Profit</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</ons-bottom-toolbar>
-					<script>
-						updateDash();
-						setInterval(updateDash, 1000);
-						//  chart();
+                                        <div id="hidecumloss" class="ui yellow mini compact inverted statistic">
+                                            <div class="value">
+                                                <span id="cumlosses">...</span>
+                                            </div>
+                                            <div class="label">cum. losses</div>
+                                        </div>
+                                        <div class="ui right mini compact inverted statistic">
+                                            <div class="value">
+                                                <span id="profit">...</span>
+                                            </div>
+                                            <div class="label">Profit</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ons-bottom-toolbar>
+                    <script>
+                        updateDash();
+                        setInterval(updateDash, 1000);
+                        //  chart();
 
-						function streamData() {
-							if (
-								tradeInProgress === true ||
-								(autoTrade == true && runrun === true)
-							) {
-								document.getElementById("callTrade").disabled = true;
-								document.getElementById("putTrade").disabled = true;
-							} else {
-								document.getElementById("callTrade").disabled = false;
-								document.getElementById("putTrade").disabled = false;
-							}
-						}
+                        function streamData() {
+                            if (
+                                tradeInProgress === true ||
+                                (autoTrade == true && runrun === true)
+                            ) {
+                                document.getElementById("callTrade").disabled = true;
+                                document.getElementById("putTrade").disabled = true;
+                            } else {
+                                document.getElementById("callTrade").disabled = false;
+                                document.getElementById("putTrade").disabled = false;
+                            }
+                        }
 
-						// Manual trading buttons event listeners with conditions for when auto trading is on REMOVE comment on tradeinprogress true, once placetrades has been written
-						if (document.getElementById("callTrade") != null) {
-							document
-								.getElementById("callTrade")
-								.addEventListener("click", function (event) {
-									manualCall();
-									console.log("Call Clicked");
-								});
+                        // Manual trading buttons event listeners with conditions for when auto trading is on REMOVE comment on tradeinprogress true, once placetrades has been written
+                        if (document.getElementById("callTrade") != null) {
+                            document
+                                .getElementById("callTrade")
+                                .addEventListener("click", function (event) {
+                                    manualCall();
+                                    console.log("Call Clicked");
+                                });
 
-							document
-								.getElementById("putTrade")
-								.addEventListener("click", function (event) {
-									manualPut();
-									console.log("Put Clicked");
-								});
-						}
-						document
-							.getElementById("resetBot")
-							.addEventListener("click", function (event) {
-								resetTradingOnClick();
-							});
+                            document
+                                .getElementById("putTrade")
+                                .addEventListener("click", function (event) {
+                                    manualPut();
+                                    console.log("Put Clicked");
+                                });
+                        }
+                        document
+                            .getElementById("resetBot")
+                            .addEventListener("click", function (event) {
+                                resetTradingOnClick();
+                            });
 
-						document
-							.getElementById("startBot")
-							.addEventListener("click", function (event) {
-								startBot();
-								authorise();
-							});
-						document
-							.getElementById("pauseBot")
-							.addEventListener("click", function (event) {
-								pauseBot();
-								authorise();
-							});
+                        document
+                            .getElementById("startBot")
+                            .addEventListener("click", function (event) {
+                                startBot();
+                                authorise();
+                            });
+                        document
+                            .getElementById("pauseBot")
+                            .addEventListener("click", function (event) {
+                                pauseBot();
+                                authorise();
+                            });
 
-						// Menu functions for onsen.io
-						window.fn = {};
+                        // Menu functions for onsen.io
+                        window.fn = {};
 
-						window.fn.open = function () {
-							var menu = document.getElementById("menu");
-							menu.open();
-						};
+                        window.fn.open = function () {
+                            var menu = document.getElementById("menu");
+                            menu.open();
+                        };
 
-						window.fn.load = function (page) {
-							var content = document.getElementById("content");
-							var menu = document.getElementById("menu");
-							content.load(page).then(menu.close.bind(menu));
-						};
-					</script>
-				</ons-page>
-			</template>
+                        window.fn.load = function (page) {
+                            var content = document.getElementById("content");
+                            var menu = document.getElementById("menu");
+                            content.load(page).then(menu.close.bind(menu));
+                        };
+                    </script>
+                </ons-page>
+            </template>
 
-			<template id="parameters.html">
-				<ons-page id="parameters">
-					<ons-toolbar>
-						<div class="left">
-							<ons-toolbar-button id="close" tappable>
-								<ons-icon style="color: rgb(7, 18, 41)" icon="md-close"></ons-icon>
-							</ons-toolbar-button>
-						</div>
-						<div style="font-family: 'Comfortaa', cursive; margin-right: 5%" class="right">
-							Paramters/Settings
-						</div>
-					</ons-toolbar>
+            <template id="parameters.html">
+                <ons-page id="parameters">
+                    <ons-toolbar>
+                        <div class="left">
+                            <ons-toolbar-button id="close" tappable>
+                                <ons-icon style="color: rgb(7, 18, 41)" icon="md-close"></ons-icon>
+                            </ons-toolbar-button>
+                        </div>
+                        <div style="font-family: 'Comfortaa', cursive; margin-right: 5%" class="right">
+                            Paramters/Settings
+                        </div>
+                    </ons-toolbar>
 
-					<!--  Drop downs for the paramters -->
-					<div class="ui padded container">
-						<div class="ui hidden divider"></div>
+                    <!--  Drop downs for the paramters -->
+                    <div class="ui padded container">
+                        <div class="ui hidden divider"></div>
 
-						<h5 style="
+                        <h5 style="
 							color: black;
 							font-weight: 200;
 							font-family: 'Comfortaa', cursive;" class="ui horizontal divider header">
-							Market
-						</h5>
-						<a class="item">
-							<div class="ui small fluid selection dropdown" id="Marketdropdown">
-								<div id="marketSelect" class="text">Select Market</div>
-								<i class="dropdown icon"></i>
-								<div class="menu">
-									<div id="Auto" data-value="Auto" class="item">
-										Auto Select
-									</div>
-									<div id="R_10" data-value="R_10" class="item">
-										Volatility Index 10
-									</div>
-									<div id="R_25" data-value="R_25" class="item">
-										Volatility Index 25
-									</div>
-									<div id="R_50" data-value="R_50" class="item">
-										Volatility Index 50
-									</div>
-									<div id="R_75" data-value="R_75" class="item">
-										Volatility Index 75
-									</div>
-									<div id="R_100" data-value="R_100" class="item">
-										Volatility Index 100
-									</div>
-									<div id="RDBEAR" data-value="RDBEAR" class="item">
-										Bear Market Index
-									</div>
-									<div id="RDBULL" data-value="RDBULL" class="item">
-										Bull Market Index
-									</div>
-								</div>
-							</div>
-						</a>
-						<h5 style="
+                            Market
+                        </h5>
+                        <a class="item">
+                            <div class="ui small fluid selection dropdown" id="Marketdropdown">
+                                <div id="marketSelect" class="text">Select Market</div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <div id="Auto" data-value="Auto" class="item">
+                                        Auto Select
+                                    </div>
+                                    <div id="R_10" data-value="R_10" class="item">
+                                        Volatility Index 10
+                                    </div>
+                                    <div id="R_25" data-value="R_25" class="item">
+                                        Volatility Index 25
+                                    </div>
+                                    <div id="R_50" data-value="R_50" class="item">
+                                        Volatility Index 50
+                                    </div>
+                                    <div id="R_75" data-value="R_75" class="item">
+                                        Volatility Index 75
+                                    </div>
+                                    <div id="R_100" data-value="R_100" class="item">
+                                        Volatility Index 100
+                                    </div>
+                                    <div id="RDBEAR" data-value="RDBEAR" class="item">
+                                        Bear Market Index
+                                    </div>
+                                    <div id="RDBULL" data-value="RDBULL" class="item">
+                                        Bull Market Index
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <h5 style="
 							color: black;
 							font-weight: 200; " class="ui horizontal divider header">
-							Stake & Stops
-						</h5>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">Stake</div>
-								<input id="setStake" type="text" placeholder=" e.g. 0.35" />
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">Stop Loss</div>
-								<input id="setStopLoss" type="text" placeholder=" e.g. 300" />
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">Trailing Stop</div>
-								<input id="setTrailingStop" type="text" placeholder=" e.g. 25" />
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">Take Profit</div>
-								<input id="setTakeProfit" type="text" placeholder=" e.g. 50" />
-							</div>
-						</a>
+                            Stake & Stops
+                        </h5>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">Stake</div>
+                                <input id="setStake" type="text" placeholder=" e.g. 0.35" />
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">Stop Loss</div>
+                                <input id="setStopLoss" type="text" placeholder=" e.g. 300" />
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">Trailing Stop</div>
+                                <input id="setTrailingStop" type="text" placeholder=" e.g. 25" />
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">Take Profit</div>
+                                <input id="setTakeProfit" type="text" placeholder=" e.g. 50" />
+                            </div>
+                        </a>
 
-						<h5 style="
+                        <h5 style="
 							color: black;
 							font-weight: 200;
 							font-family: 'Comfortaa', cursive;
 						  " class="ui horizontal divider header">
-							Progression Style
-						</h5>
+                            Progression Style
+                        </h5>
 
-						<a class="item">
-							<div class="ui small fluid selection dropdown" id="MMdropdown">
-								<input name="MM Style" id="MMdataset" />
-								<i class="dropdown icon"></i>
-								<div id="dropDownDefault" class="default text">
-									Please Select
-								</div>
-								<div class="menu" id="currentMM">
-									<div class="item" id="MGbasic" data-value="Martingale">
-										Martingale
-									</div>
-									<div class="item" id="MGcum" data-value="Cum. Loss">
-										Cum. Loss
-									</div>
-									<div class="item" id="MGladder" data-value="Ladder">
-										Ladder
-									</div>
-									<div class="item" id="MGcompound" data-value="Compound">
-										Compound
-									</div>
-									<div class="item" id="MGoscar" data-value="Oscar">
-										Oscar's Grind
-									</div>
-									<div class="item" id="MGDAlembert" data-value="DAlembert">
-										D'Alembert
-									</div>
-									<div class="item" id="MGnone" data-value="None">
-										None (bad idea)
-									</div>
-								</div>
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">Manual Override after</div>
-								<input id="setautolimit" type="text" placeholder=" e.g. 5" />
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<div class="ui label">MG/Compound Reset</div>
-								<input id="mgreset" type="text" placeholder=" e.g. 7" />
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid selection dropdown" id="MMdropdown">
+                                <input name="MM Style" id="MMdataset" />
+                                <i class="dropdown icon"></i>
+                                <div id="dropDownDefault" class="default text">
+                                    Please Select
+                                </div>
+                                <div class="menu" id="currentMM">
+                                    <div class="item" id="MGbasic" data-value="Martingale">
+                                        Martingale
+                                    </div>
+                                    <div class="item" id="MGcum" data-value="Cum. Loss">
+                                        Cum. Loss
+                                    </div>
+                                    <div class="item" id="MGladder" data-value="Ladder">
+                                        Ladder
+                                    </div>
+                                    <div class="item" id="MGcompound" data-value="Compound">
+                                        Compound
+                                    </div>
+                                    <div class="item" id="MGoscar" data-value="Oscar">
+                                        Oscar's Grind
+                                    </div>
+                                    <div class="item" id="MGDAlembert" data-value="DAlembert">
+                                        D'Alembert
+                                    </div>
+                                    <div class="item" id="MGnone" data-value="None">
+                                        None (bad idea)
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">Manual Override after</div>
+                                <input id="setautolimit" type="text" placeholder=" e.g. 5" />
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <div class="ui label">MG/Compound Reset</div>
+                                <input id="mgreset" type="text" placeholder=" e.g. 7" />
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
 
-						<h5 style="
+                        <h5 style="
 							color: black;
 							font-weight: 200;
 							font-family: 'Comfortaa', cursive;
 						  " class="ui horizontal divider header">
-							Auto Trading
-						</h5>
+                            Auto Trading
+                        </h5>
 
-						<a class="item">
-							<div class="ui small fluid selection dropdown" id="Stratdropdowntype">
-								<input name="ST Style" id="STdatasettype" />
-								<i class="dropdown icon"></i>
-								<div id="strategyAutotype" class="default text">
-									Please Select
-								</div>
-								<div class="menu" id="currentSTtype">
-									<div id="risefall" data-value="risefall" class="item">
-										Rise/Fall
-									</div>
-									<div id="hilower" data-value="hilower" class="item">
-										Higher/Lower
-									</div>
-								</div>
-							</div>
-							<div class="ui hidden divider"></div>
-							<div class="ui small fluid selection dropdown" id="Stratdropdown">
-								<input name="ST Style" id="STdataset" />
-								<i class="dropdown icon"></i>
-								<div id="strategyAuto" class="default text">
-									Please Select
-								</div>
-								<div class="menu" id="currentST">
-									<div id="PriceAction" data-value="priceAction" class="item">
-										Price Action
-									</div>
-									<div id="HeikenAshi" data-value="HeikenAshi" class="item">
-										Heiken Ashi Trends
-									</div>
-									<div id="HeikenMA" data-value="HeikenMA" class="item">
-										Heiken Ashi MA
-									</div>
-									<div id="movingAverage" data-value="movingAverage" class="item">
-										Moving Average Cross
-									</div>
-									<div id="adaptiveML" data-value="adaptiveML" class="item">
-										Adaptive ML
-									</div>
-									<div id="PivotPoint" data-value="PivotPoint" class="item">
-										Pivot Point Cross
-									</div>
-									<div id="SMAtrend" data-value="SMAtrend" class="item">
-										SMA trend (20,5)
-									</div>
-								</div>
-							</div>
-						</a>
-						<div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid selection dropdown" id="Stratdropdowntype">
+                                <input name="ST Style" id="STdatasettype" />
+                                <i class="dropdown icon"></i>
+                                <div id="strategyAutotype" class="default text">
+                                    Please Select
+                                </div>
+                                <div class="menu" id="currentSTtype">
+                                    <div id="risefall" data-value="risefall" class="item">
+                                        Rise/Fall
+                                    </div>
+                                    <div id="hilower" data-value="hilower" class="item">
+                                        Higher/Lower
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="ui small fluid selection dropdown" id="Stratdropdown">
+                                <input name="ST Style" id="STdataset" />
+                                <i class="dropdown icon"></i>
+                                <div id="strategyAuto" class="default text">
+                                    Please Select
+                                </div>
+                                <div class="menu" id="currentST">
+                                    <div id="PriceAction" data-value="priceAction" class="item">
+                                        Price Action
+                                    </div>
+                                    <div id="HeikenAshi" data-value="HeikenAshi" class="item">
+                                        Heiken Ashi Trends
+                                    </div>
+                                    <div id="HeikenMA" data-value="HeikenMA" class="item">
+                                        Heiken Ashi MA
+                                    </div>
+                                    <div id="movingAverage" data-value="movingAverage" class="item">
+                                        Moving Average Cross
+                                    </div>
+                                    <div id="adaptiveML" data-value="adaptiveML" class="item">
+                                        Adaptive ML
+                                    </div>
+                                    <div id="PivotPoint" data-value="PivotPoint" class="item">
+                                        Pivot Point Cross
+                                    </div>
+                                    <div id="SMAtrend" data-value="SMAtrend" class="item">
+                                        SMA trend (20,5)
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="ui hidden divider"></div>
 
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<input id="durationIntAuto" type="number" placeholder="1-10 (t) | 15 + (s)" />
-								<div class="ui left dropdown label" id="TDdropdownAuto">
-									<div id="curDurationAuto" class="text">period</div>
-									<i class="dropdown icon"></i>
-									<div class="menu">
-										<div id="durationTAuto" class="item">ticks (t)</div>
-										<div id="durationSAuto" class="item">sec (s)</div>
-										<div id="durationMAuto" class="item">min (m)</div>
-									</div>
-								</div>
-							</div>
-						</a>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <input id="durationIntAuto" type="number" placeholder="1-10 (t) | 15 + (s)" />
+                                <div class="ui left dropdown label" id="TDdropdownAuto">
+                                    <div id="curDurationAuto" class="text">period</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div id="durationTAuto" class="item">ticks (t)</div>
+                                        <div id="durationSAuto" class="item">sec (s)</div>
+                                        <div id="durationMAuto" class="item">min (m)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
 
-						<h5 style=" color: black; font-weight: 200; font-family: 'Comfortaa', cursive;"
-							class="ui horizontal divider header">
-							Manual Trading
-						</h5>
-						<a class="item">
-							<div class="ui small fluid labeled input">
-								<input id="durationInt" type="number" placeholder="1-10 (t) | 15 + (s)" />
-								<div class="ui left dropdown label" id="TDdropdown">
-									<div id="curDuration" class="text">period</div>
-									<i class="dropdown icon"></i>
-									<div class="menu">
-										<div id="durationT" class="item">ticks (t)</div>
-										<div id="durationS" class="item">sec (s)</div>
-										<div id="durationM" class="item">min (m)</div>
-									</div>
-								</div>
-							</div>
-						</a>
+                        <h5 style=" color: black; font-weight: 200; font-family: 'Comfortaa', cursive;"
+                            class="ui horizontal divider header">
+                            Manual Trading
+                        </h5>
+                        <a class="item">
+                            <div class="ui small fluid labeled input">
+                                <input id="durationInt" type="number" placeholder="1-10 (t) | 15 + (s)" />
+                                <div class="ui left dropdown label" id="TDdropdown">
+                                    <div id="curDuration" class="text">period</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div id="durationT" class="item">ticks (t)</div>
+                                        <div id="durationS" class="item">sec (s)</div>
+                                        <div id="durationM" class="item">min (m)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
 
-						<div class="ui hidden divider"></div>
-						<a class="item">
-							<div class="ui small fluid green submit button" id="saveParameters">Save Parameters</div>
-						</a>
-						<div class="ui hidden divider"></div>
-					</div>
+                        <div class="ui hidden divider"></div>
+                        <a class="item">
+                            <div class="ui small fluid green submit button" id="saveParameters">Save Parameters</div>
+                        </a>
+                        <div class="ui hidden divider"></div>
+                    </div>
 
-					<script>
-						// Jquery for parameters
-						$("#MMdropdown").dropdown();
-						$("#TDdropdown").dropdown();
-						$("#TDdropdownAuto").dropdown();
-						$("#Stratdropdown").dropdown();
-						$("#Stratdropdowntype").dropdown('set selected', 'hilower');
-						$("#Marketdropdown").dropdown();
+                    <script>
+                        // Jquery for parameters
+                        $("#MMdropdown").dropdown();
+                        $("#TDdropdown").dropdown();
+                        $("#TDdropdownAuto").dropdown();
+                        $("#Stratdropdown").dropdown();
+                        $("#Stratdropdowntype").dropdown('set selected', 'hilower');
+                        $("#Marketdropdown").dropdown();
 
-						//trade Duration selector
-						loadSettings();
+                        //trade Duration selector
+                        loadSettings();
 
-						document
-							.getElementById("durationT")
-							.addEventListener("click", function (event) {
-								ManualtradeDurationUnit = "t";
-								console.log(ManualtradeDurationUnit);
-							});
-						document
-							.getElementById("durationS")
-							.addEventListener("click", function (event) {
-								ManualtradeDurationUnit = "s";
-								console.log(ManualtradeDurationUnit);
-							});
-						document
-							.getElementById("durationM")
-							.addEventListener("click", function (event) {
-								ManualtradeDurationUnit = "m";
-								console.log(ManualtradeDurationUnit);
-							});
+                        document
+                            .getElementById("durationT")
+                            .addEventListener("click", function (event) {
+                                ManualtradeDurationUnit = "t";
+                                console.log(ManualtradeDurationUnit);
+                            });
+                        document
+                            .getElementById("durationS")
+                            .addEventListener("click", function (event) {
+                                ManualtradeDurationUnit = "s";
+                                console.log(ManualtradeDurationUnit);
+                            });
+                        document
+                            .getElementById("durationM")
+                            .addEventListener("click", function (event) {
+                                ManualtradeDurationUnit = "m";
+                                console.log(ManualtradeDurationUnit);
+                            });
 
-						document
-							.getElementById("durationTAuto")
-							.addEventListener("click", function (event) {
-								AutotradeDurationUnit = "t";
-								console.log(AutotradeDurationUnit);
-							});
-						document
-							.getElementById("durationSAuto")
-							.addEventListener("click", function (event) {
-								AutotradeDurationUnit = "s";
-								console.log(AutotradeDurationUnit);
-							});
-						document
-							.getElementById("durationMAuto")
-							.addEventListener("click", function (event) {
-								AutotradeDurationUnit = "m";
-								console.log(AutotradeDurationUnit);
-							});
+                        document
+                            .getElementById("durationTAuto")
+                            .addEventListener("click", function (event) {
+                                AutotradeDurationUnit = "t";
+                                console.log(AutotradeDurationUnit);
+                            });
+                        document
+                            .getElementById("durationSAuto")
+                            .addEventListener("click", function (event) {
+                                AutotradeDurationUnit = "s";
+                                console.log(AutotradeDurationUnit);
+                            });
+                        document
+                            .getElementById("durationMAuto")
+                            .addEventListener("click", function (event) {
+                                AutotradeDurationUnit = "m";
+                                console.log(AutotradeDurationUnit);
+                            });
 
-						// $('#strategyAutotype').dropdown('set text', strategy) 
+                        // $('#strategyAutotype').dropdown('set text', strategy) 
 
-						// load previous settings
-						function loadSettings() {
-							document.getElementById(
-								"curDuration"
-							).innerHTML = ManualtradeDurationUnit;
-							document.getElementById(
-								"durationInt"
-							).value = ManualtradeDurationInt;
+                        // load previous settings
+                        function loadSettings() {
+                            document.getElementById(
+                                "curDuration"
+                            ).innerHTML = ManualtradeDurationUnit;
+                            document.getElementById(
+                                "durationInt"
+                            ).value = ManualtradeDurationInt;
 
-							document.getElementById(
-								"curDurationAuto"
-							).innerHTML = AutotradeDurationUnit;
-							document.getElementById(
-								"durationIntAuto"
-							).value = AutotradeDurationInt;
+                            document.getElementById(
+                                "curDurationAuto"
+                            ).innerHTML = AutotradeDurationUnit;
+                            document.getElementById(
+                                "durationIntAuto"
+                            ).value = AutotradeDurationInt;
 
-							document.getElementById("strategyAuto").innerHTML = autoStrat;
+                            document.getElementById("strategyAuto").innerHTML = autoStrat;
 
-							// document.getElementById("strategyAutotype").innerHTML = 'risefall';
-							if (MGStyle != undefined) {
-								document.getElementById(
-									"dropDownDefault"
-								).innerHTML = MGStyle;
-							}
-							if (symbolsymbol != undefined) {
-								if (autoSymbol) {
-									document.getElementById("marketSelect").innerHTML =
-										"Auto Select";
-								} else {
-									document.getElementById(
-										"marketSelect"
-									).innerHTML = symbolsymbol;
-								}
-							}
+                            // document.getElementById("strategyAutotype").innerHTML = 'risefall';
+                            if (MGStyle != undefined) {
+                                document.getElementById(
+                                    "dropDownDefault"
+                                ).innerHTML = MGStyle;
+                            }
+                            if (symbolsymbol != undefined) {
+                                if (autoSymbol) {
+                                    document.getElementById("marketSelect").innerHTML =
+                                        "Auto Select";
+                                } else {
+                                    document.getElementById(
+                                        "marketSelect"
+                                    ).innerHTML = symbolsymbol;
+                                }
+                            }
 
-							if (initialStakeinitialStake != undefined) {
-								document.getElementById(
-									"setStake"
-								).value = initialStakeinitialStake;
-							}
-							if (trailingStop != undefined) {
-								document.getElementById(
-									"setTrailingStop"
-								).value = trailingStop;
-							}
-							if (takeProfit != undefined) {
-								document.getElementById("setTakeProfit").value = takeProfit;
-							}
-							if (stopLoss != undefined) {
-								document.getElementById("setStopLoss").value = stopLoss;
-							}
-							if (MGReset != undefined) {
-								document.getElementById("mgreset").value = MGReset;
-							}
-							if (autoThresh != undefined) {
-								document.getElementById("setautolimit").value = autoThresh;
-							}
+                            if (initialStakeinitialStake != undefined) {
+                                document.getElementById(
+                                    "setStake"
+                                ).value = initialStakeinitialStake;
+                            }
+                            if (trailingStop != undefined) {
+                                document.getElementById(
+                                    "setTrailingStop"
+                                ).value = trailingStop;
+                            }
+                            if (takeProfit != undefined) {
+                                document.getElementById("setTakeProfit").value = takeProfit;
+                            }
+                            if (stopLoss != undefined) {
+                                document.getElementById("setStopLoss").value = stopLoss;
+                            }
+                            if (MGReset != undefined) {
+                                document.getElementById("mgreset").value = MGReset;
+                            }
+                            if (autoThresh != undefined) {
+                                document.getElementById("setautolimit").value = autoThresh;
+                            }
 
-							if (ManualtradeDurationInt != undefined) {
-								document.getElementById(
-									"curDuration"
-								).innerHTML = ManualtradeDurationUnit;
-								document.getElementById(
-									"durationInt"
-								).value = ManualtradeDurationInt;
-							}
-						}
+                            if (ManualtradeDurationInt != undefined) {
+                                document.getElementById(
+                                    "curDuration"
+                                ).innerHTML = ManualtradeDurationUnit;
+                                document.getElementById(
+                                    "durationInt"
+                                ).value = ManualtradeDurationInt;
+                            }
+                        }
 
-						// save trading parameters
-						savePar = document.getElementById("saveParameters");
+                        // save trading parameters
+                        savePar = document.getElementById("saveParameters");
 
-						savePar.addEventListener("click", function (event) {
-							saveParametersOnClick();
-							switched = true;
-						});
-					</script>
-				</ons-page>
-			</template>
-		</div>
-		<div id="tradingGrid" class="twelve wide column" style="padding: 0 1em;">
-			<div class="wrapper">
-				<div class="buttonWrapper">
-					<button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">Profit
-						Table</button>
-					<button class="tab-button" data-id="about">Chart</button>
-				</div>
-				<div class="contentWrapper">
-					<div class="content active" id="home">
-						<table id="myTableBody">
-							<thead>
-								<tr>
-									<th>Market</th>
-									<th>Refferance</th>
-									<th>Signal</th>
-									<th>Stake</th>
-									<th>Profit</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-					</div>
-					<p class="content" id="about">
-						<iframe frameborder="0" height="90%" scrolling="no"
-							src="https://tradingview.binary.me/v1.3.12/main.html">
-						</iframe>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+                        savePar.addEventListener("click", function (event) {
+                            saveParametersOnClick();
+                            switched = true;
+                        });
+                    </script>
+                </ons-page>
+            </template>
+        </div>
+        <div id="tradingGrid" class="twelve wide column" style="padding: 0 1em;">
+            <div class="wrapper">
+                <div class="buttonWrapper">
+                    <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">Profit
+                        Table</button>
+                    <button class="tab-button" data-id="about">Chart</button>
+                </div>
+                <div class="contentWrapper">
+                    <div class="content active" id="home">
+                        <table id="myTableBody">
+                            <thead>
+                                <tr>
+                                    <th>Market</th>
+                                    <th>Refferance</th>
+                                    <th>Signal</th>
+                                    <th>Stake</th>
+                                    <th>Profit</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="content" id="about">
+                        <iframe frameborder="0" height="90%" scrolling="no"
+                            src="https://binarybottrading.com/trade/R_100.html">
+                        </iframe>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <!-- Insert this line above script imports  -->
 <script>
-	if (typeof module === "object") {
-		window.module = module;
-		module = undefined;
-	}
+    if (typeof module === "object") {
+        window.module = module;
+        module = undefined;
+    }
 </script>
 
 <style>
-	.wrapper {
-		margin: auto;
-		background-color: white;
-		/* border-radius: 10px; */
-		box-shadow: 0px 5px 15px rgba(0, 0, 0, .1);
-	}
+    .wrapper {
+        margin: auto;
+        background-color: white;
+        /* border-radius: 10px; */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, .1);
+    }
 
-	.contentWrapper {
-		height: 94vh;
-		overflow-y: scroll;
-	}
+    .contentWrapper {
+        height: 94vh;
+        overflow-y: scroll;
+    }
 
-	.buttonWrapper {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
+    .buttonWrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 
-	button {
-		letter-spacing: 3px;
-		border: none;
-		padding: 10px;
-		background-color: #f1f1f1;
-		color: #3bb3e4;
-		font-size: 18px;
-		cursor: pointer;
-		transition: 0.5s;
-	}
+    button {
+        letter-spacing: 3px;
+        border: none;
+        padding: 10px;
+        background-color: #f1f1f1;
+        color: #3bb3e4;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.5s;
+    }
 
-	button:hover {
-		background-color: #d5e3ff;
-	}
+    button:hover {
+        background-color: #d5e3ff;
+    }
 
-	button.active {
-		/* background-color: #f1f1f1; */
-		background-color: #3bb3e4;
-		color: #f1f1f1;
-	}
+    button.active {
+        /* background-color: #f1f1f1; */
+        background-color: #3bb3e4;
+        color: #f1f1f1;
+    }
 
-	.active {
-		background-color: white;
-		/* color: #3bb3e4; */
-	}
+    .active {
+        background-color: white;
+        /* color: #3bb3e4; */
+    }
 
-	p {
-		text-align: left;
-		padding: 10px;
-	}
+    p {
+        text-align: left;
+        padding: 10px;
+    }
 
-	.content {
-		display: none;
-		padding: 10px 20px;
-	}
+    .content {
+        display: none;
+        padding: 10px 20px;
+    }
 
-	.content.active {
-		display: block;
-	}
+    .content.active {
+        display: block;
+    }
 </style>
 
 <script src="assests/js/binary-live-api.js"></script>
@@ -803,176 +818,170 @@
 <script src="assests/js/startup.js"></script>
 <!-- Insert this line after script imports -->
 <script>
-	if (window.module) module = window.module;
+    if (window.module) module = window.module;
 </script>
 
 <script>
-	const errorNotify = window.createNotification({
-		// close on click
-		closeOnClick: true,
+    const errorNotify = window.createNotification({
+        // close on click
+        closeOnClick: true,
 
-		showDuration: 7500,
-		positionClass: "nfc-bottom-right",
+        showDuration: 7500,
+        positionClass: "nfc-bottom-right",
 
-		theme: "warning",
-	});
+        theme: "warning",
+    });
 
-	$("#createaccount").click(function () {
-		window.open(
-			"https://track.deriv.com/_J7M51m8rKai2vdm9PpHVCmNd7ZgqdRLk/1/",
-			"_blank"
-		);
-	});
-	// Load tradingview based on symbol
-	var chartSymbol = "";
+    // Load tradingview based on symbol
+    var chartSymbol = "";
 
-	function changeChart() {
-		console.log("symbol=" + symbolsymbol, "chart=" + chartSymbol);
-		if (symbolsymbol != chartSymbol) {
-			console.log("should be reloading");
-			chartSymbol = symbolsymbol;
-			// document.getElementById("tradingviewWindow").src =
-			//   symbolsymbol + ".html";
+    function changeChart() {
+        console.log("symbol=" + symbolsymbol, "chart=" + chartSymbol);
+        if (symbolsymbol != chartSymbol) {
+            console.log("should be reloading");
+            chartSymbol = symbolsymbol;
+            // document.getElementById("tradingviewWindow").src =
+            //   symbolsymbol + ".html";
 
-			// document.getElementById('tradingviewWindow').contentWindow.location.reload(true)
+            // document.getElementById('tradingviewWindow').contentWindow.location.reload(true)
 
-			// document.getElementById("tradingviewWindow").innerHTML =
-			//   '<object type="text/html" data="' +
-			//   symbolsymbol +
-			//   '.html" ></object>';
-		}
-	}
-	changeChart();
-	setInterval(changeChart, 1000);
+            // document.getElementById("tradingviewWindow").innerHTML =
+            //   '<object type="text/html" data="' +
+            //   symbolsymbol +
+            //   '.html" ></object>';
+        }
+    }
+    changeChart();
+    setInterval(changeChart, 1000);
 </script>
 <script>
-	// Menu functions for onsen.io
+    // Menu functions for onsen.io
 
-	window.fn = {};
+    window.fn = {};
 
-	window.fn.open = function () {
-		var menu = document.getElementById("menu");
-		menu.open();
-	};
+    window.fn.open = function () {
+        var menu = document.getElementById("menu");
+        menu.open();
+    };
 
-	window.fn.load = function (page) {
-		var content = document.getElementById("content");
-		var menu = document.getElementById("menu");
-		content.load(page).then(menu.close.bind(menu));
-	};
+    window.fn.load = function (page) {
+        var content = document.getElementById("content");
+        var menu = document.getElementById("menu");
+        content.load(page).then(menu.close.bind(menu));
+    };
 
-	data();
-	setInterval(data, 2000);
+    data();
+    setInterval(data, 2000);
 
-	$(document).ready(function () {
-		$("#loading").delay(4000).fadeOut(2000);
-		login();
-	});
+    $(document).ready(function () {
+        $("#loading").delay(4000).fadeOut(2000);
+        login();
+    });
 </script>
 
 <script>
-	document.addEventListener("init", function (event) {
-		var page = event.target;
+    document.addEventListener("init", function (event) {
+        var page = event.target;
 
-		if (page.id === "bot") {
-			page.querySelector("#settings").onclick = function () {
-				document.querySelector("#myNavigator").pushPage("parameters.html");
-			};
-		}
-		if (page.id === "parameters") {
-			page.querySelector("#close").onclick = function () {
-				document.querySelector("#myNavigator").popPage();
-			};
-		}
-		if (page.id === "parameters") {
-			page.querySelector("#saveParameters").onclick = function () {
-				document.querySelector("#myNavigator").popPage();
-			};
-		}
-	});
+        if (page.id === "bot") {
+            page.querySelector("#settings").onclick = function () {
+                document.querySelector("#myNavigator").pushPage("parameters.html");
+            };
+        }
+        if (page.id === "parameters") {
+            page.querySelector("#close").onclick = function () {
+                document.querySelector("#myNavigator").popPage();
+            };
+        }
+        if (page.id === "parameters") {
+            page.querySelector("#saveParameters").onclick = function () {
+                document.querySelector("#myNavigator").popPage();
+            };
+        }
+    });
 
-	api.events.on("tick", function (response) {
-		//console.log('subscription =', response);
-		// console.log(response.tick.symbol, response.tick.quote)
+    api.events.on("tick", function (response) {
+        //console.log('subscription =', response);
+        // console.log(response.tick.symbol, response.tick.quote)
 
-		ticks.push(response.tick.quote);
-		lastTick = response.tick.quote * 1;
-		lastEpoch = response.tick.epoch * 1;
+        ticks.push(response.tick.quote);
+        lastTick = response.tick.quote * 1;
+        lastEpoch = response.tick.epoch * 1;
 
-		lastSecond = lastEpoch % 60;
-		// Sparkline rendering
+        lastSecond = lastEpoch % 60;
+        // Sparkline rendering
 
-		var normalRange = null;
+        var normalRange = null;
 
-		var color;
-		var barrierColour;
-		var drawontop;
+        var color;
+        var barrierColour;
+        var drawontop;
 
-		if (tradeInProgress === false) {
-			normalRange = Math.max(...ticks.slice(-150));
-			normalRange2 = Math.min(...ticks.slice(-150));
-			color = "blue";
-			barrierColour = "#ffff";
-			drawontop = false;
-		}
+        if (tradeInProgress === false) {
+            normalRange = Math.max(...ticks.slice(-150));
+            normalRange2 = Math.min(...ticks.slice(-150));
+            color = "blue";
+            barrierColour = "#ffff";
+            drawontop = false;
+        }
 
-		if (callOrPut == "PUT" && winLossBarrier != "no open trade") {
-			// console.log('Main If Triggered PUT'+tradeBarrierNo)
-			drawontop = true;
-			// console.log('No barrier PUT')
-			if (lastTick < winLossBarrier) {
-				color = "green";
-				normalRange = winLossBarrier;
-				normalRange2 = Math.min(...ticks.slice(-150));
-				barrierColour = "#C6ECC940";
-			} else if (lastTick > winLossBarrier) {
-				color = "red";
-				normalRange2 = winLossBarrier;
-				normalRange = Math.max(...ticks.slice(-150));
-				barrierColour = "#EEB5B540";
-			}
-		}
+        if (callOrPut == "PUT" && winLossBarrier != "no open trade") {
+            // console.log('Main If Triggered PUT'+tradeBarrierNo)
+            drawontop = true;
+            // console.log('No barrier PUT')
+            if (lastTick < winLossBarrier) {
+                color = "green";
+                normalRange = winLossBarrier;
+                normalRange2 = Math.min(...ticks.slice(-150));
+                barrierColour = "#C6ECC940";
+            } else if (lastTick > winLossBarrier) {
+                color = "red";
+                normalRange2 = winLossBarrier;
+                normalRange = Math.max(...ticks.slice(-150));
+                barrierColour = "#EEB5B540";
+            }
+        }
 
-		if (callOrPut == "CALL" && winLossBarrier != "no open trade") {
-			// console.log('Main If Triggered CALL')
-			normalRange2 = winLossBarrier;
-			normalRange = Math.max(...ticks.slice(-150));
-			// console.log('No barrier CALL')
-			if (lastTick > winLossBarrier) {
-				color = "green";
-				normalRange2 = winLossBarrier;
-				normalRange = Math.max(...ticks.slice(-150));
+        if (callOrPut == "CALL" && winLossBarrier != "no open trade") {
+            // console.log('Main If Triggered CALL')
+            normalRange2 = winLossBarrier;
+            normalRange = Math.max(...ticks.slice(-150));
+            // console.log('No barrier CALL')
+            if (lastTick > winLossBarrier) {
+                color = "green";
+                normalRange2 = winLossBarrier;
+                normalRange = Math.max(...ticks.slice(-150));
 
-				barrierColour = "#C6ECC940";
-			} else if (lastTick < winLossBarrier) {
-				color = "red";
-				normalRange = winLossBarrier;
-				normalRange2 = Math.min(...ticks.slice(-150));
+                barrierColour = "#C6ECC940";
+            } else if (lastTick < winLossBarrier) {
+                color = "red";
+                normalRange = winLossBarrier;
+                normalRange2 = Math.min(...ticks.slice(-150));
 
-				barrierColour = "#EEB5B540";
-			}
-		}
+                barrierColour = "#EEB5B540";
+            }
+        }
 
-		$("#sparkline").sparkline(ticks.slice(-150), {
-			spotColor: color,
-			type: "line",
-			width: "100%",
-			height: "100%",
-			lineColor: color,
-			fillColor: "#BABABA40",
-			minSpotColor: "#C90000",
-			maxSpotColor: "#002AB3",
-			spotRadius: 2,
-			disableHighlight: true,
-			disableTooltips: true,
-			normalRangeMax: normalRange,
-			normalRangeMin: normalRange2,
-			normalRangeColor: barrierColour,
-			drawNormalOnTop: drawontop,
-		});
-	});
+        $("#sparkline").sparkline(ticks.slice(-150), {
+            spotColor: color,
+            type: "line",
+            width: "100%",
+            height: "100%",
+            lineColor: color,
+            fillColor: "#BABABA40",
+            minSpotColor: "#C90000",
+            maxSpotColor: "#002AB3",
+            spotRadius: 2,
+            disableHighlight: true,
+            disableTooltips: true,
+            normalRangeMax: normalRange,
+            normalRangeMin: normalRange2,
+            normalRangeColor: barrierColour,
+            drawNormalOnTop: drawontop,
+        });
+    });
 
-	console.log(api.events.messageHandlers);
+    console.log(api.events.messageHandlers);
 </script>
 
 </html>
